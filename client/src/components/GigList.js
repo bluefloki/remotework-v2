@@ -5,7 +5,7 @@ export const GigList = () => {
   return (
     <div>
       <Navbar />
-      <h1>This is the gig list</h1>
+      <h1 className="text-centered color-primary">Gigs</h1>
     </div>
   );
 };

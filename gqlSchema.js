@@ -12,6 +12,7 @@ const {
 const JobType = new GraphQLObjectType({
   name: "Job",
   fields: () => ({
+    _id: { type: GraphQLString },
     companyName: { type: GraphQLString },
     category: { type: GraphQLString },
     location: { type: GraphQLString },
