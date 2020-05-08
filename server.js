@@ -20,7 +20,7 @@ db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("Connected to mongoose"));
 
 const cors = require("cors");
-app.use(cors);
+app.use(cors());
 //Routes
 app.use(
   "/graphql",

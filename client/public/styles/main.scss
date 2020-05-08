@@ -4,6 +4,7 @@ $secondary-color: #888;
 $danger-color: #e8290b;
 $background-color: #1e222e;
 $text-primary: white;
+$third-color: #ddd;
 
 //VARIABLES END
 
@@ -127,3 +128,24 @@ select {
 }
 
 //FORM STYLES END
+
+//CARD STYLES START
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  width: 60%;
+  margin: auto;
+  padding: 0 20px;
+  background-color: $third-color;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+
+//CARD STYLES END

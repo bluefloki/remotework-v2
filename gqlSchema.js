@@ -13,11 +13,19 @@ const JobType = new GraphQLObjectType({
   name: "Job",
   fields: () => ({
     _id: { type: GraphQLString },
+    title: { type: GraphQLString },
     companyName: { type: GraphQLString },
     category: { type: GraphQLString },
     location: { type: GraphQLString },
     applyAt: { type: GraphQLString },
     datePosted: { type: GraphQLString },
+  }),
+});
+
+const TagType = new GraphQLObjectType({
+  name: "Tag",
+  fields: () => ({
+    title: { type: GraphQLString },
   }),
 });
 
@@ -43,6 +51,8 @@ const RootQuery = new GraphQLObjectType({
           .then((res) => res.data);
       },
     },
+    //Tags field
+    //DO THESE
     //Gig fields
   },
 });
