@@ -41,4 +41,3 @@ const JobSchema = mongoose.Schema({
 JobSchema.index({ title: "text" });
 
 module.exports = mongoose.model("Job", JobSchema);
-module.exports.companyLogoBasePath = companyLogoBasePath;
