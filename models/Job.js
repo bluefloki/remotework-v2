@@ -1,21 +1,20 @@
 const mongoose = require("mongoose");
 
 const JobSchema = mongoose.Schema({
-  companyName: {
+  employerName: {
     type: String,
     required: true,
   },
-  companyLogoName: String,
   title: {
+    type: String,
+    required: true,
+  },
+  typeOfWork: {
     type: String,
     required: true,
   },
   category: {
     type: String,
-    required: true,
-  },
-  salary: {
-    type: Number,
     required: true,
   },
   location: String,
@@ -32,12 +31,10 @@ const JobSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  datePostedString: {
-    type: String,
-    required: true,
-  },
+  // datePostedString: {
+  //   type: String,
+  //   required: true,
+  // },
 });
-
-JobSchema.index({ title: "text" });
 
 module.exports = mongoose.model("Job", JobSchema);

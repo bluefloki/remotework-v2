@@ -6,6 +6,7 @@ const {
   GraphQLBoolean,
   GraphQLList,
   GraphQLSchema,
+  GraphQLNonNull,
 } = require("graphql");
 
 //Job Type
@@ -57,6 +58,48 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
+//Mutation
+const mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: () => ({
+    addJob: {
+      type: JobType,
+      args: {
+        employerName: { type: new GraphQLNonNull(GraphQLString) },
+        typeOfWork: { type: new GraphQLNonNull(GraphQLString) },
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        category: { type: new GraphQLNonNull(GraphQLString) },
+        location: { type: GraphQLString },
+        applyAt: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        const {
+          employerName,
+          typeOfWork,
+          title,
+          category,
+          location,
+          applyAt,
+          description,
+        } = args;
+        return axios
+          .post("http://localhost:5050/api/v1/jobs", {
+            employerName,
+            typeOfWork,
+            title,
+            category,
+            location,
+            applyAt,
+            description,
+          })
+          .then((res) => res.data);
+      },
+    },
+  }),
+});
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation,
 });

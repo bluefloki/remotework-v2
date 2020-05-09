@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Jobs = require("../../models/Job");
+const Job = require("../../models/Job");
 
 router.get("/", async (req, res) => {
-  const allJobs = await Jobs.find().sort({ datePosted: -1 });
+  //Where typeOfWork is Job
+  const allJobs = await Job.find().sort({ datePosted: -1 });
   try {
     res.status(200).json(allJobs);
   } catch (error) {
@@ -13,11 +14,21 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const job = await Jobs.findById(req.params.id);
+  const job = await Job.findById(req.params.id);
   try {
     res.status(200).json(job);
   } catch (error) {
     res.status(404).json({ message: "Job not found" });
+  }
+});
+
+router.post("/", (req, res) => {
+  const newJob = new Job(req.body);
+  console.log(newJob);
+  try {
+    res.status(201).json(newJob);
+  } catch (error) {
+    res.json({ message: "Error creating job" });
   }
 });
 

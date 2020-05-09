@@ -59,8 +59,6 @@ export const PostJob = () => {
       tags,
       description: editorHtml,
     };
-    console.log(newJob);
-    //Add job with context here
   };
 
   return (
