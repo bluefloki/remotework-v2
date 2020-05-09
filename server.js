@@ -5,9 +5,6 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-const graphqlHTTP = require("express-graphql");
-const schema = require("./gqlSchema");
-
 const jobsRouter = require("./routes/api/Jobs");
 
 //Database
@@ -23,13 +20,6 @@ db.once("open", () => console.log("Connected to mongoose"));
 const cors = require("cors");
 app.use(cors());
 //Routes
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema,
-    graphiql: true,
-  })
-);
 app.use("/api/v1/jobs", jobsRouter);
 
 const port = 5050 || process.env.PORT;

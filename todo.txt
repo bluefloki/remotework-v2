@@ -1,8 +1,2 @@
--- Prettify Date
--- Upload Logos
--- Redesign the models
--- do the gigs
--- Inifinite Scroll
--- Premium feature (Rs. 1000 for 3 days)(Also do spots)
--- make single job page
--- Implement context api
+-- Context API
+-- Post request

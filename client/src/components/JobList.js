@@ -1,32 +1,26 @@
-import React from "react";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
+import React, { useState, useEffect } from "react";
+import { Navbar } from "./Navbar";
+import axios from "axios";
 import { JobCard } from "./JobCard";
 
-const JOBS_QUERY = gql`
-  query JobsQuery {
-    jobs {
-      _id
-      title
-      companyName
-      category
-      location
-      applyAt
-      datePosted
-    }
-  }
-`;
-
 export const JobList = () => {
-  const { loading, error, data } = useQuery(JOBS_QUERY);
+  const [data, setData] = useState([]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  //Used instead of component did mount
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get("/api/v1/jobs");
+      setData(res.data);
+    };
+    fetchData();
+  }, []);
   return (
-    <>
-      {data.jobs.map((job) => (
+    <div className="job-list">
+      <Navbar />
+      <h1 className="text-centered color-primary">Jobs</h1>
+      {data.map((job) => (
         <JobCard key={job._id} job={job} />
       ))}
-    </>
+    </div>
   );
 };
