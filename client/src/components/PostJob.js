@@ -1,14 +1,24 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useContext } from "react";
 import { Navbar } from "./Navbar";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { GlobalContext } from "../context/GlobalState";
+import sanitizeHtml from "sanitize-html";
 
 export const PostJob = () => {
+  //Use context to send the data
+  const { addJob } = useContext(GlobalContext);
   //Set editor HTML
   const [editorHtml, setEditorHtml] = useState("");
   function handleHtml(html) {
     setEditorHtml(html);
   }
+
+  //Sanitize HTML
+  const description = sanitizeHtml(editorHtml, {
+    allowedTags: ["h1", "h2", "h3", "p", "strong", "em", "u", "ol", "ul", "li"],
+    allowedAttributes: [],
+  });
 
   //Get Logo
   const [logo, setLogo] = useState(null);
@@ -27,7 +37,7 @@ export const PostJob = () => {
       jobTitle: "",
       category: "Software",
       location: "",
-      tags: [],
+      tags: "",
     }
   );
 
@@ -41,24 +51,19 @@ export const PostJob = () => {
   //Create the object for POST
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {
-      employerName,
-      typeOfWork,
-      jobTitle,
-      category,
-      location,
-      tags,
-    } = userInput;
+    alert("Submitted");
+    let { tags } = userInput;
+    tags = tags.split(",", 4);
+    tags = tags.map((tag) => {
+      tag.trim();
+      return { title: tag };
+    });
     const newJob = {
-      employerName,
-      //Logo
-      typeOfWork,
-      jobTitle,
-      category,
-      location,
+      ...userInput,
       tags,
-      description: editorHtml,
+      description,
     };
+    addJob(newJob);
   };
 
   return (
@@ -163,7 +168,7 @@ export const PostJob = () => {
             <button
               className="btn btn-primary"
               type="submit"
-              style={{ fontSize: "1.2rem" }}
+              style={{ fontSize: "1.2rem", cursor: "pointer" }}
             >
               Post 👉
             </button>

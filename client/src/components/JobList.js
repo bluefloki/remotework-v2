@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Navbar } from "./Navbar";
-import axios from "axios";
 import { JobCard } from "./JobCard";
+import { GlobalContext } from "../context/GlobalState";
 
 export const JobList = () => {
-  const [data, setData] = useState([]);
+  const { jobs, getJobs } = useContext(GlobalContext);
 
-  //Used instead of component did mount
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get("/api/v1/jobs");
-      setData(res.data);
-    };
-    fetchData();
+    getJobs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div className="job-list">
       <Navbar />
       <h1 className="text-centered color-primary">Jobs</h1>
-      {data.map((job) => (
+      {jobs.map((job) => (
         <JobCard key={job._id} job={job} />
       ))}
     </div>
