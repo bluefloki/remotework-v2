@@ -10,7 +10,6 @@ export default (state, action) => {
     case "ADD_JOB":
       return {
         ...state,
-        jobs: [...state.jobs, action.payload],
       };
 
     default:

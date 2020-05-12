@@ -5,12 +5,12 @@ import { GlobalContext } from "../context/GlobalState";
 
 export const JobList = () => {
   const { jobs, getJobs } = useContext(GlobalContext);
+  console.log(jobs);
 
   useEffect(() => {
     getJobs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <div className="job-list">
       <Navbar />

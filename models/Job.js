@@ -5,6 +5,7 @@ const JobSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  logoPath: String,
   title: {
     type: String,
     required: true,

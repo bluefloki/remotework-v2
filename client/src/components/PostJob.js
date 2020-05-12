@@ -20,19 +20,12 @@ export const PostJob = () => {
     allowedAttributes: [],
   });
 
-  //Get Logo
-  const [logo, setLogo] = useState(null);
-  const handleFile = (e) => {
-    console.log(e.target.files[0]);
-    setLogo(e.target.files);
-    console.log(logo);
-  };
-
   //Get the values of the inputs
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
       employerName: "",
+      logo: null,
       typeOfWork: "Job",
       jobTitle: "",
       category: "Software",
@@ -41,11 +34,21 @@ export const PostJob = () => {
     }
   );
 
+  //Handle Change
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
 
     setUserInput({ [name]: value });
+  };
+
+  let logoPathName;
+  //Handle File Upload
+  const handleFile = (e) => {
+    const name = e.target.name;
+    const file = e.target.files[0];
+
+    setUserInput({ [name]: file });
   };
 
   //Create the object for POST
@@ -55,7 +58,7 @@ export const PostJob = () => {
     let { tags } = userInput;
     tags = tags.split(",", 4);
     tags = tags.map((tag) => {
-      tag.trim();
+      tag = tag.trim();
       return { title: tag };
     });
     const newJob = {
@@ -64,6 +67,7 @@ export const PostJob = () => {
       description,
     };
     addJob(newJob);
+    console.log(newJob);
   };
 
   return (
@@ -87,8 +91,8 @@ export const PostJob = () => {
               />
             </div>
             <div className="field" style={{ paddingBottom: 20 }}>
-              <label htmlFor="employerLogo">Logo(Max 1 MB)</label>
-              <input type="file" name="employerLogo" onChange={handleFile} />
+              <label htmlFor="logo">Logo(Max 1 MB)</label>
+              <input type="file" name="logo" onChange={handleFile} />
             </div>
           </div>
           <hr />

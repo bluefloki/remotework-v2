@@ -1,8 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
 
 export const JobCard = ({
-  job: { _id, companyName, title, category, location, applyAt, datePosted },
+  job: {
+    _id,
+    companyName,
+    title,
+    category,
+    location,
+    applyAt,
+    datePosted,
+    tags,
+  },
 }) => {
   return (
     <div className="container" style={{ margin: "20px 0" }}>
@@ -10,10 +20,13 @@ export const JobCard = ({
         to={`/jobs/${_id}`}
         className="card"
         style={{ textDecoration: "none" }}
+        target="_blank"
       >
         <div>
           <p>LOGO</p>
-          <p>{datePosted}</p>
+          <p>
+            <Moment format="DD MMM YYYY">{datePosted}</Moment>
+          </p>
         </div>
         <div>
           <p>{title}</p>
@@ -21,7 +34,9 @@ export const JobCard = ({
           <p>{location}</p>
         </div>
         <div>
-          <p>Tags</p>
+          {tags.map((tag) => (
+            <p key={tag._id}>{tag.title}</p>
+          ))}
         </div>
       </Link>
     </div>
