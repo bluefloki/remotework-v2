@@ -35,7 +35,7 @@ export const GlobalProvider = ({ children }) => {
   async function addJob(job) {
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     };
     try {

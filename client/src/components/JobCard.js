@@ -5,13 +5,14 @@ import Moment from "react-moment";
 export const JobCard = ({
   job: {
     _id,
-    companyName,
+    employerName,
     title,
     category,
     location,
     applyAt,
     datePosted,
     tags,
+    logoPath,
   },
 }) => {
   return (
@@ -23,14 +24,14 @@ export const JobCard = ({
         target="_blank"
       >
         <div>
-          <p>LOGO</p>
+          <img src={`${logoPath}`} alt="" srcset="" />
           <p>
             <Moment format="DD MMM YYYY">{datePosted}</Moment>
           </p>
         </div>
         <div>
+          <p>{employerName}</p>
           <p>{title}</p>
-          <p>{companyName}</p>
           <p>{location}</p>
         </div>
         <div>

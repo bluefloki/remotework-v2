@@ -25,9 +25,8 @@ export const PostJob = () => {
     (state, newState) => ({ ...state, ...newState }),
     {
       employerName: "",
-      logo: null,
       typeOfWork: "Job",
-      jobTitle: "",
+      title: "",
       category: "Software",
       location: "",
       tags: "",
@@ -44,11 +43,9 @@ export const PostJob = () => {
 
   let logoPathName;
   //Handle File Upload
+  const [logo, setLogo] = useState("");
   const handleFile = (e) => {
-    const name = e.target.name;
-    const file = e.target.files[0];
-
-    setUserInput({ [name]: file });
+    setLogo(e.target.files[0]);
   };
 
   //Create the object for POST
@@ -66,15 +63,17 @@ export const PostJob = () => {
       tags,
       description,
     };
-    addJob(newJob);
-    console.log(newJob);
+    let formData = new FormData();
+    formData.append("data", JSON.stringify(newJob));
+    formData.append("logo", logo);
+    addJob(formData);
   };
 
   return (
     <div style={{ maxWidth: "100vw", marginBottom: 100 }}>
       <Navbar />
       <div className="container">
-        <form className="text-centered" onSubmit={handleSubmit}>
+        <form className="text-centered" onSubmit={handleSubmit} id="main-form">
           <div>
             <h2 className="text-centered">Employer 🏢/🤵</h2>
             <div className="field">
@@ -112,10 +111,10 @@ export const PostJob = () => {
               </select>
             </div>
             <div className="field">
-              <label htmlFor="jobTitle">
+              <label htmlFor="title">
                 Title <span className="color-danger">*</span>
               </label>
-              <input type="text" name="jobTitle" onChange={handleChange} />
+              <input type="text" name="title" onChange={handleChange} />
             </div>
             <div className="field">
               <label htmlFor="category">
