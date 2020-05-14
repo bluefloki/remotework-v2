@@ -146,8 +146,8 @@ select {
   transition: 0.3s;
   border-radius: 5px;
   /* 5px rounded corners */
-  width: 60%;
-  margin: auto;
+  width: 70%;
+  margin: 20px auto;
   padding: 0 20px;
   background-color: #ddd;
   color: black;

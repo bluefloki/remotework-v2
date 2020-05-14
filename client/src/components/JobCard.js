@@ -16,7 +16,7 @@ export const JobCard = ({
   },
 }) => {
   return (
-    <div className="container" style={{ margin: "20px 0" }}>
+    <div className="container">
       <Link
         to={`/jobs/${_id}`}
         className="card"
@@ -24,7 +24,6 @@ export const JobCard = ({
         target="_blank"
       >
         <div>
-          <img src={`${logoPath}`} alt="" srcset="" />
           <p>
             <Moment format="DD MMM YYYY">{datePosted}</Moment>
           </p>

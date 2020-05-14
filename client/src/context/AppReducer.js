@@ -7,6 +7,13 @@ export default (state, action) => {
         jobs: action.payload,
       };
 
+    case "GET_SINGLE_JOB":
+      return {
+        ...state,
+        loading: false,
+        job: action.payload,
+      };
+
     case "ADD_JOB":
       return {
         ...state,

@@ -5,7 +5,6 @@ import { GlobalContext } from "../context/GlobalState";
 
 export const JobList = () => {
   const { jobs, getJobs } = useContext(GlobalContext);
-  console.log(jobs);
 
   useEffect(() => {
     getJobs();

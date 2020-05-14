@@ -5,6 +5,7 @@ import AppReducer from "./AppReducer";
 const initialState = {
   //gigs
   jobs: [],
+  job: {},
   error: null,
   loading: true,
 };
@@ -27,6 +28,21 @@ export const GlobalProvider = ({ children }) => {
     } catch (err) {
       dispatch({
         type: "JOBS_ERROR",
+        payload: err.response.data.error,
+      });
+    }
+  }
+
+  async function getSingleJob(id) {
+    try {
+      const res = await axios.get(`/api/v1/jobs/${id}`);
+      dispatch({
+        type: "GET_SINGLE_JOB",
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: "JOB_ERROR",
         payload: err.response.data.error,
       });
     }
@@ -56,10 +72,12 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         jobs: state.jobs,
+        job: state.job,
         loading: state.loading,
         error: state.error,
         getJobs,
         addJob,
+        getSingleJob,
       }}
     >
       {children}
