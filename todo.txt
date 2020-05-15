@@ -1,3 +1,5 @@
 -- Animations
 -- Show images in the job card
 -- Copy for gigs
+-- Searchbar
+-- Infinite Scroll

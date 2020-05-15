@@ -6,6 +6,11 @@ export default (state, action) => {
         loading: false,
         jobs: action.payload,
       };
+    case "RESET_JOBS":
+      return {
+        ...state,
+        jobs: [],
+      };
 
     case "ADD_JOB":
       return {

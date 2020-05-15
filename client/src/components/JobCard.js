@@ -16,6 +16,7 @@ export const JobCard = ({
     logoPath,
     description,
   },
+  defLogo,
 }) => {
   const [details, toggleDetails] = useState(false);
 
@@ -38,7 +39,7 @@ export const JobCard = ({
   return (
     <div className="container">
       <div
-        className="card"
+        className="card card-grid"
         onClick={() => toggleDetails(!details)}
         style={
           details
@@ -50,19 +51,24 @@ export const JobCard = ({
             : {}
         }
       >
-        <div>
+        <div style={{ textAlign: "center" }}>
+          <p className="defLogo" style={{ fontSize: 30, margin: 0 }}>
+            {defLogo}
+          </p>
           <p>
             <Moment format="DD MMM YYYY">{datePosted}</Moment>
           </p>
         </div>
-        <div>
+        <div style={{ fontSize: "1.1em" }}>
           <p>{employerName}</p>
-          <p>{title}</p>
+          <p style={{ fontWeight: "550" }}>{title}</p>
           <p>{location}</p>
         </div>
         <div>
           {tags.map((tag) => (
-            <p key={tag._id}>{tag.title}</p>
+            <p key={tag._id} className="tag">
+              {tag.title}
+            </p>
           ))}
         </div>
       </div>
@@ -70,3 +76,5 @@ export const JobCard = ({
     </div>
   );
 };
+
+const styles = {};

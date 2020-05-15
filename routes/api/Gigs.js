@@ -4,8 +4,7 @@ const Gig = require("../../models/Job");
 
 router.get("/", async (req, res) => {
   //Where typeOfWork is Job
-  const allGigs = Gig.find({ typeOfWork: "Gig" });
-  console.log(allGigs);
+  const allGigs = await Gig.find({ typeOfWork: "Gig" });
   try {
     res.status(200).json(allGigs);
   } catch (error) {

@@ -5,7 +5,6 @@ import AppReducer from "./AppReducer";
 const initialState = {
   //gigs
   jobs: [],
-  job: {},
   error: null,
   loading: true,
 };
@@ -35,6 +34,12 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  function resetJobs() {
+    dispatch({
+      type: "RESET_JOBS",
+    });
+  }
+
   async function addJob(job) {
     const config = {
       headers: {
@@ -59,11 +64,11 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         jobs: state.jobs,
-        job: state.job,
         loading: state.loading,
         error: state.error,
         getJobs,
         addJob,
+        resetJobs,
       }}
     >
       {children}

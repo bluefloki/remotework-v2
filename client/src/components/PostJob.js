@@ -91,8 +91,10 @@ export const PostJob = () => {
               />
             </div>
             <div className="field" style={{ paddingBottom: 20 }}>
-              <label htmlFor="logo">Logo(Max 1 MB)</label>
-              <input type="file" name="logo" onChange={handleFile} />
+              <label htmlFor="logo" hidden>
+                Logo(Max 1 MB)
+              </label>
+              <input type="file" name="logo" onChange={handleFile} hidden />
             </div>
           </div>
           <hr />
