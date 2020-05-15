@@ -7,7 +7,9 @@ const { v4: uuidv4 } = require("uuid");
 
 router.get("/", async (req, res) => {
   //Where typeOfWork is Job
-  const allJobs = await Job.find().sort({ datePosted: -1 });
+  const allJobs = await Job.find({ typeOfWork: "Job" }).sort({
+    datePosted: -1,
+  });
   try {
     res.status(200).json(allJobs);
   } catch (error) {
@@ -16,18 +18,20 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  const job = await Job.findById(req.params.id);
-  try {
-    res.status(200).json(job);
-  } catch (error) {
-    res.status(404).json({ message: "Job not found" });
-  }
-});
+// router.get("/:id", async (req, res) => {
+//   const job = await Job.findById(req.params.id);
+//   try {
+//     res.status(200).json(job);
+//   } catch (error) {
+//     res.status(404).json({ message: "Job not found" });
+//   }
+// });
 
 router.post("/", async (req, res) => {
   let newJob = new Job(JSON.parse(req.body.data));
-  const logo = req.files.logo;
+  if (req.files !== null) {
+    const logo = req.files.logo;
+  }
   try {
     if (
       (logo != null) &

@@ -6,6 +6,7 @@ const app = express();
 app.use(express.json());
 
 const jobsRouter = require("./routes/api/Jobs");
+const gigsRouter = require("./routes/api/Gigs");
 
 //Database
 const mongoose = require("mongoose");
@@ -21,6 +22,7 @@ const cors = require("cors");
 app.use(cors());
 //Routes
 app.use("/api/v1/jobs", jobsRouter);
+app.use("/api/v1/gigs", gigsRouter);
 
 const port = 5050 || process.env.PORT;
 app.listen(port, () => console.log("App is running on port 5050"));

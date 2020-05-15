@@ -79,6 +79,7 @@ hr {
   padding: 12px 20px;
   border: none;
   font-size: 1rem;
+  text-decoration: none;
   color: white;
   border-radius: 10px;
   -webkit-transition-duration: 0.4s;
@@ -103,11 +104,30 @@ hr {
   color: #0a79df;
 }
 
-.btn-primary:hover .link {
+.btn-primary:hover a {
   color: #0a79df;
 }
 
-.btn-primary .link {
+.btn-primary a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.btn-danger {
+  background-color: #e8290b;
+}
+
+.btn-danger:hover {
+  background-color: white;
+  color: #e8290b;
+}
+
+.btn-danger:hover a {
+  color: #e8290b;
+}
+
+.btn-danger a {
   color: white;
   text-decoration: none;
   font-size: 1rem;
@@ -142,8 +162,8 @@ select {
 .card {
   -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
+  -webkit-transition: 0.7s;
+  transition: 0.7s;
   border-radius: 5px;
   /* 5px rounded corners */
   width: 70%;
@@ -157,10 +177,21 @@ select {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  cursor: pointer;
 }
 
 .card:hover {
   -webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.job-details {
+  width: 60%;
+  width: 70%;
+  margin: 0 auto 20px auto;
+  color: #353535;
+  background-color: #fff;
+  padding: 30px 20px;
+  border-radius: 0 0 5px 5px;
 }
 /*# sourceMappingURL=main.css.map */

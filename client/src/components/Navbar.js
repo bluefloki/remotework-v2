@@ -15,11 +15,9 @@ export const Navbar = () => {
         <Link to="/gigs" className="navbar-link navbar-item">
           Gigs
         </Link>
-        <button className="btn btn-primary navbar-item">
-          <Link to="/postjob" className="link">
-            Post Job/Gig
-          </Link>
-        </button>
+        <Link to="/postjob" className="btn btn-primary navbar-item">
+          Post Job/Gig
+        </Link>
       </div>
     </nav>
   );

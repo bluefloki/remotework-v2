@@ -67,6 +67,7 @@ export const PostJob = () => {
     formData.append("data", JSON.stringify(newJob));
     formData.append("logo", logo);
     addJob(formData);
+    console.log(newJob);
   };
 
   return (

@@ -12,16 +12,12 @@ export const MainPage = () => {
           Welcome to Pakistan's only site for Remote Jobs 🔥
         </h1>
         <div>
-          <button className="btn btn-primary" style={styles.button}>
-            <Link to="/jobs" className="link">
-              Browse Jobs
-            </Link>
-          </button>
-          <button className="btn btn-primary" style={styles.button}>
-            <Link to="/gigs" className="link">
-              Browse Gigs
-            </Link>
-          </button>
+          <Link to="/jobs" className="btn btn-primary" style={styles.button}>
+            Browse Jobs
+          </Link>
+          <Link to="/gigs" className="btn btn-primary" style={styles.button}>
+            Browse Gigs
+          </Link>
         </div>
       </div>
     </div>

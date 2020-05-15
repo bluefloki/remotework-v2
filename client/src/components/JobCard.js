@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
+import { JobDetails } from "./JobDetails";
 
 export const JobCard = ({
   job: {
@@ -13,15 +14,41 @@ export const JobCard = ({
     datePosted,
     tags,
     logoPath,
+    description,
   },
 }) => {
+  const [details, toggleDetails] = useState(false);
+
+  //Function to toggle details
+  const showDetails = () => {
+    if (details) {
+      return (
+        <div className="job-details">
+          <div dangerouslySetInnerHTML={{ __html: description }}></div>
+          <div className="text-centered">
+            <a href={applyAt} className="btn btn-danger">
+              Apply Now
+            </a>
+          </div>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="container">
-      <Link
-        to={`/jobs/${_id}`}
+      <div
         className="card"
-        style={{ textDecoration: "none" }}
-        target="_blank"
+        onClick={() => toggleDetails(!details)}
+        style={
+          details
+            ? {
+                marginBottom: 0,
+                borderRadius: "5px 5px 0 0",
+                borderBottom: "1px solid #888",
+              }
+            : {}
+        }
       >
         <div>
           <p>
@@ -38,7 +65,8 @@ export const JobCard = ({
             <p key={tag._id}>{tag.title}</p>
           ))}
         </div>
-      </Link>
+      </div>
+      {showDetails()}
     </div>
   );
 };

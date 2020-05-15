@@ -20,7 +20,9 @@ export const GlobalProvider = ({ children }) => {
   //actions to get and post stuff
   async function getJobs() {
     try {
-      const res = await axios.get("/api/v1/jobs");
+      const res = window.location.href.includes("jobs")
+        ? await axios.get("/api/v1/jobs")
+        : await axios.get("/api/v1/gigs");
       dispatch({
         type: "GET_JOBS",
         payload: res.data,
@@ -28,21 +30,6 @@ export const GlobalProvider = ({ children }) => {
     } catch (err) {
       dispatch({
         type: "JOBS_ERROR",
-        payload: err.response.data.error,
-      });
-    }
-  }
-
-  async function getSingleJob(id) {
-    try {
-      const res = await axios.get(`/api/v1/jobs/${id}`);
-      dispatch({
-        type: "GET_SINGLE_JOB",
-        payload: res.data,
-      });
-    } catch (err) {
-      dispatch({
-        type: "JOB_ERROR",
         payload: err.response.data.error,
       });
     }
@@ -77,7 +64,6 @@ export const GlobalProvider = ({ children }) => {
         error: state.error,
         getJobs,
         addJob,
-        getSingleJob,
       }}
     >
       {children}
