@@ -1,12 +1,13 @@
 import React, { createContext, useReducer } from "react";
 import axios from "axios";
 import AppReducer from "./AppReducer";
+import { startSession } from "mongoose";
 
 const initialState = {
-  //gigs
   jobs: [],
   error: null,
   loading: true,
+  page: 1,
 };
 
 //Create Context
@@ -20,8 +21,8 @@ export const GlobalProvider = ({ children }) => {
   async function getJobs() {
     try {
       const res = window.location.href.includes("jobs")
-        ? await axios.get("/api/v1/jobs")
-        : await axios.get("/api/v1/gigs");
+        ? await axios.get("/api/v1/jobs", { params: { page: state.page } })
+        : await axios.get("/api/v1/gigs", { params: { page: state.page } });
       dispatch({
         type: "GET_JOBS",
         payload: res.data,
@@ -37,6 +38,16 @@ export const GlobalProvider = ({ children }) => {
   function resetJobs() {
     dispatch({
       type: "RESET_JOBS",
+    });
+  }
+
+  async function incrementPage() {
+    const res = window.location.href.includes("jobs")
+      ? await axios.get("/api/v1/jobs", { params: { page: state.page } })
+      : await axios.get("/api/v1/gigs", { params: { page: state.page } });
+    dispatch({
+      type: "INCREMENT_PAGE",
+      payload: res.data,
     });
   }
 
@@ -66,9 +77,11 @@ export const GlobalProvider = ({ children }) => {
         jobs: state.jobs,
         loading: state.loading,
         error: state.error,
+        page: state.page,
         getJobs,
         addJob,
         resetJobs,
+        incrementPage,
       }}
     >
       {children}

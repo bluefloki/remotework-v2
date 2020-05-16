@@ -20,17 +20,37 @@ export const JobCard = ({
 }) => {
   const [details, toggleDetails] = useState(false);
 
+  //Function for showing apply
+  const applyLink = () => {
+    if (applyAt.includes("@"))
+      return (
+        <h3 className="text-centered">
+          Apply at:{" "}
+          <a
+            className="color-danger"
+            href={`mailto: ${applyAt}`}
+            style={{ textDecoration: "none" }}
+          >
+            {applyAt}
+          </a>
+        </h3>
+      );
+    return (
+      <div className="text-centered">
+        <a href={applyAt} className="btn btn-danger" target="_blank">
+          Apply Now
+        </a>
+      </div>
+    );
+  };
+
   //Function to toggle details
   const showDetails = () => {
     if (details) {
       return (
         <div className="job-details">
           <div dangerouslySetInnerHTML={{ __html: description }}></div>
-          <div className="text-centered">
-            <a href={applyAt} className="btn btn-danger">
-              Apply Now
-            </a>
-          </div>
+          {applyLink()}
         </div>
       );
     }

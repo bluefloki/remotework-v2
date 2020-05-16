@@ -6,10 +6,12 @@ router.use(fileUpload());
 const { v4: uuidv4 } = require("uuid");
 
 router.get("/", async (req, res) => {
-  //Where typeOfWork is Job
-  const allJobs = await Job.find({ typeOfWork: "Job" }).sort({
-    datePosted: -1,
-  });
+  const { search, page } = req.query;
+  const limit = 10;
+  const allJobs = await Job.find({ typeOfWork: "Job" })
+    .skip((page - 1) * limit)
+    .limit(limit)
+    .sort({ datePosted: -1 });
   try {
     res.status(200).json(allJobs);
   } catch (error) {

@@ -3,8 +3,12 @@ const router = express.Router();
 const Gig = require("../../models/Job");
 
 router.get("/", async (req, res) => {
-  //Where typeOfWork is Job
-  const allGigs = await Gig.find({ typeOfWork: "Gig" });
+  const { search, page } = req.query;
+  const limit = 10;
+  const allGigs = await Gig.find({ typeOfWork: "Gig" })
+    .skip((page - 1) * limit)
+    .limit(limit)
+    .sort({ datePosted: -1 });
   try {
     res.status(200).json(allGigs);
   } catch (error) {
