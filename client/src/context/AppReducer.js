@@ -10,7 +10,6 @@ export default (state, action) => {
       };
 
     case "RESET_JOBS":
-      console.log(`Page on unmount: ${state.page}`);
       state.page = 1;
       return {
         ...state,
@@ -18,10 +17,12 @@ export default (state, action) => {
       };
 
     case "INCREMENT_PAGE": {
+      console.log(action.payload.length);
       return {
         ...state,
         page: state.page + 1,
         jobs: [...state.jobs, ...action.payload],
+        hasMore: action.payload.length === 0 ? false : true,
       };
     }
 

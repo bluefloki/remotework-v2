@@ -8,6 +8,7 @@ const initialState = {
   error: null,
   loading: true,
   page: 1,
+  hasMore: true,
 };
 
 //Create Context
@@ -78,6 +79,7 @@ export const GlobalProvider = ({ children }) => {
         loading: state.loading,
         error: state.error,
         page: state.page,
+        hasMore: state.hasMore,
         getJobs,
         addJob,
         resetJobs,

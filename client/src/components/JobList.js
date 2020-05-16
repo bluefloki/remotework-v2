@@ -5,7 +5,11 @@ import { GlobalContext } from "../context/GlobalState";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export const JobList = ({ work, defLogo }) => {
-  let { jobs, getJobs, resetJobs, incrementPage } = useContext(GlobalContext);
+  let { jobs, getJobs, resetJobs, incrementPage, hasMore } = useContext(
+    GlobalContext
+  );
+
+  console.log(hasMore);
 
   useEffect(() => {
     getJobs();
@@ -20,17 +24,13 @@ export const JobList = ({ work, defLogo }) => {
       <InfiniteScroll
         dataLength={jobs.length}
         next={incrementPage}
-        hasMore={true}
+        hasMore={hasMore}
         loader={
           <h4 className="text-centered" style={{ marginBottom: 40 }}>
             Loading...
           </h4>
         }
-        endMessage={
-          <h4 className="text-centered" style={{ marginBottom: 40 }}>
-            No More Jobs
-          </h4>
-        }
+        endMessage={<p style={{ marginBottom: 50 }}></p>}
       >
         {jobs.map((job) => (
           <JobCard key={job._id} job={job} defLogo={defLogo} />
