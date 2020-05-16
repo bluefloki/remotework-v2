@@ -1,12 +1,12 @@
 export default (state, action) => {
   switch (action.type) {
     case "GET_JOBS":
-      console.log(`Page on mount: ${state.page}`);
       return {
         ...state,
         loading: false,
         jobs: action.payload,
         page: state.page + 1,
+        searchValue: state.searchValue,
       };
 
     case "RESET_JOBS":
@@ -17,7 +17,6 @@ export default (state, action) => {
       };
 
     case "INCREMENT_PAGE": {
-      console.log(action.payload.length);
       return {
         ...state,
         page: state.page + 1,

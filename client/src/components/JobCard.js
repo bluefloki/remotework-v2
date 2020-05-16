@@ -48,7 +48,7 @@ export const JobCard = ({
   const showDetails = () => {
     if (details) {
       return (
-        <div className="job-details">
+        <div className="job-details" style={{ transition: "all 0.7s ease" }}>
           <div dangerouslySetInnerHTML={{ __html: description }}></div>
           {applyLink()}
         </div>

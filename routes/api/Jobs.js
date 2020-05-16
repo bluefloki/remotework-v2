@@ -8,7 +8,10 @@ const { v4: uuidv4 } = require("uuid");
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
   const limit = 30;
-  const allJobs = await Job.find({ typeOfWork: "Job" })
+  let searchOptions = {
+    typeOfWork: "Job",
+  };
+  const allJobs = await Job.find(searchOptions)
     .skip((page - 1) * limit)
     .limit(limit)
     .sort({ datePosted: -1 });

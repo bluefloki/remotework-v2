@@ -84,6 +84,7 @@ hr {
   border-radius: 10px;
   -webkit-transition-duration: 0.4s;
           transition-duration: 0.4s;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -194,6 +195,8 @@ select {
   background-color: #fff;
   padding: 30px 20px;
   border-radius: 0 0 5px 5px;
+  -webkit-transition: all 0.7s ease;
+  transition: all 0.7s ease;
 }
 
 .card-grid {

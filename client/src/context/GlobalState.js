@@ -9,6 +9,7 @@ const initialState = {
   loading: true,
   page: 1,
   hasMore: true,
+  searchValue: "",
 };
 
 //Create Context
@@ -20,10 +21,15 @@ export const GlobalProvider = ({ children }) => {
 
   //actions to get and post stuff
   async function getJobs() {
+    console.log(state.searchValue);
     try {
       const res = window.location.href.includes("jobs")
-        ? await axios.get("/api/v1/jobs", { params: { page: state.page } })
-        : await axios.get("/api/v1/gigs", { params: { page: state.page } });
+        ? await axios.get("/api/v1/jobs", {
+            params: { page: state.page, search: state.searchValue },
+          })
+        : await axios.get("/api/v1/gigs", {
+            params: { page: state.page, search: state.searchValue },
+          });
       dispatch({
         type: "GET_JOBS",
         payload: res.data,
@@ -80,6 +86,7 @@ export const GlobalProvider = ({ children }) => {
         error: state.error,
         page: state.page,
         hasMore: state.hasMore,
+        searchValue: state.searchValue,
         getJobs,
         addJob,
         resetJobs,

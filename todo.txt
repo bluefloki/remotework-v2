@@ -1,4 +1,5 @@
 -- Animations
 -- Show images in the job card
 -- Searchbar
--- fix Infinite Scroll end page
+
+https://www.npmjs.com/package/mongoose-fuzzy-searching

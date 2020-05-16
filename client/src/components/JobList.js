@@ -9,7 +9,7 @@ export const JobList = ({ work, defLogo }) => {
     GlobalContext
   );
 
-  console.log(hasMore);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     getJobs();
@@ -21,6 +21,19 @@ export const JobList = ({ work, defLogo }) => {
     <div className="job-list">
       <Navbar />
       <h1 className="text-centered color-primary">{work}</h1>
+      <div className="text-centered">
+        <input
+          type="text"
+          name="search"
+          placeholder={`Search ${work}...`}
+          style={styles.searchBar}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button className="btn btn-primary" style={styles.button}>
+          Go
+        </button>
+      </div>
+
       <InfiniteScroll
         dataLength={jobs.length}
         next={incrementPage}
@@ -38,4 +51,17 @@ export const JobList = ({ work, defLogo }) => {
       </InfiniteScroll>
     </div>
   );
+};
+
+const styles = {
+  searchBar: {
+    width: "25%",
+    padding: "7px",
+    margin: "0 0 10px 0",
+  },
+  button: {
+    padding: "7px 15px",
+    borderRadius: 0,
+    margin: 0,
+  },
 };

@@ -5,7 +5,10 @@ const Gig = require("../../models/Job");
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
   const limit = 30;
-  const allGigs = await Gig.find({ typeOfWork: "Gig" })
+  let searchOptions = {
+    typeOfWork: "Gig",
+  };
+  const allGigs = await Gig.find(searchOptions)
     .skip((page - 1) * limit)
     .limit(limit)
     .sort({ datePosted: -1 });
