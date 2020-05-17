@@ -5,9 +5,15 @@ import { GlobalContext } from "../context/GlobalState";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export const JobList = ({ work, defLogo }) => {
-  let { jobs, getJobs, resetJobs, incrementPage, hasMore } = useContext(
-    GlobalContext
-  );
+  let {
+    jobs,
+    getJobs,
+    resetJobs,
+    incrementPage,
+    hasMore,
+    searchValue,
+    setSearchValue,
+  } = useContext(GlobalContext);
 
   const [search, setSearch] = useState("");
 
@@ -15,7 +21,7 @@ export const JobList = ({ work, defLogo }) => {
     getJobs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => resetJobs();
-  }, []);
+  }, [searchValue]);
 
   return (
     <div className="job-list">
@@ -29,7 +35,14 @@ export const JobList = ({ work, defLogo }) => {
           style={styles.searchBar}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button className="btn btn-primary" style={styles.button}>
+        <button
+          className="btn btn-primary"
+          style={styles.button}
+          onClick={() => {
+            setSearchValue(search);
+            console.log(searchValue);
+          }}
+        >
           Go
         </button>
       </div>

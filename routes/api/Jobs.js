@@ -8,6 +8,7 @@ const path = require("path");
 
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
+  console.log(req.query);
   const limit = 30;
   let searchOptions = {
     typeOfWork: "Job",

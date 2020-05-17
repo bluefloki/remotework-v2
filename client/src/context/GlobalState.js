@@ -32,12 +32,18 @@ export const GlobalProvider = ({ children }) => {
         type: "GET_JOBS",
         payload: res.data,
       });
+      console.log("Get all Jobs Ran");
+      console.log(`the search value is: ${state.searchValue}`);
     } catch (err) {
       dispatch({
         type: "JOBS_ERROR",
         payload: err.response.data.error,
       });
     }
+  }
+
+  function setSearchValue(a) {
+    state.searchValue = a;
   }
 
   function resetJobs() {
@@ -48,8 +54,12 @@ export const GlobalProvider = ({ children }) => {
 
   async function incrementPage() {
     const res = window.location.href.includes("jobs")
-      ? await axios.get("/api/v1/jobs", { params: { page: state.page } })
-      : await axios.get("/api/v1/gigs", { params: { page: state.page } });
+      ? await axios.get("/api/v1/jobs", {
+          params: { page: state.page, search: state.searchValue },
+        })
+      : await axios.get("/api/v1/gigs", {
+          params: { page: state.page, search: state.searchValue },
+        });
     dispatch({
       type: "INCREMENT_PAGE",
       payload: res.data,
@@ -89,6 +99,7 @@ export const GlobalProvider = ({ children }) => {
         addJob,
         resetJobs,
         incrementPage,
+        setSearchValue,
       }}
     >
       {children}

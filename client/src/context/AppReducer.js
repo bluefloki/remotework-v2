@@ -6,7 +6,6 @@ export default (state, action) => {
         loading: false,
         jobs: action.payload,
         page: state.page + 1,
-        searchValue: state.searchValue,
       };
 
     case "RESET_JOBS":
