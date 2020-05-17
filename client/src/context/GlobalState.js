@@ -1,7 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import axios from "axios";
 import AppReducer from "./AppReducer";
-import { startSession } from "mongoose";
 
 const initialState = {
   jobs: [],
@@ -21,7 +20,6 @@ export const GlobalProvider = ({ children }) => {
 
   //actions to get and post stuff
   async function getJobs() {
-    console.log(state.searchValue);
     try {
       const res = window.location.href.includes("jobs")
         ? await axios.get("/api/v1/jobs", {

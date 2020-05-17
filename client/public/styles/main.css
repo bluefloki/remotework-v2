@@ -211,4 +211,12 @@ select {
 .tag {
   color: #0a79df;
 }
+
+.card-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
 /*# sourceMappingURL=main.css.map */

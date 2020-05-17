@@ -4,6 +4,7 @@ const Job = require("../../models/Job");
 const fileUpload = require("express-fileupload");
 router.use(fileUpload());
 const { v4: uuidv4 } = require("uuid");
+const path = require("path");
 
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
@@ -35,26 +36,29 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     let newJob = new Job(JSON.parse(req.body.data));
+    if (req.files != null) {
+      let logo = req.files.logo;
+      if (
+        logo.size < 1000000 &&
+        (logo.mimetype == "image/jpeg" || logo.mimetype == "image/png")
+      ) {
+        logo.mimetype == "image/png" ? (logo.name = `${uuidv4()}.png`) : ``;
+        logo.mimetype == "image/jpeg" ? (logo.name = `${uuidv4()}.jpg`) : ``;
+        const logoPathName = path.resolve(
+          __dirname,
+          "../../",
+          "client/src/assets/uploads",
+          logo.name
+        );
+        logo.mv(logoPathName, (err) => {
+          if (err) {
+            res.status(500).json({ message: "Cannot upload image" });
+          }
+        });
+        newJob.logoPath = logoPathName;
+      }
+    }
     await newJob.save();
-    // if (req.files.logo === null) {
-    //   console.log(newJob);
-    // } else {
-    //   let logo = req.files.logo;
-    //   if (
-    //     (logo.mimetype == ("image/jpeg" || "image/png")) &
-    //     (logo.size < 1000000)
-    //   ) {
-    //     logo.mimetype == "image/jpeg"
-    //       ? (logo.name = `${uuidv4()}.jpg`)
-    //       : `${uuidv4()}.png`;
-    //     logo.mv(`assets/uploads/${logo.name}`, (err) => {
-    //       if (err) {
-    //         res.status(500).json({ message: "Cannot upload image" });
-    //       }
-    //     });
-    //     newJob.logoPath = `${__dirname}/assets/uploads/${logo.name}`;
-    //   }
-    // }
     res.status(201).json(newJob);
   } catch (error) {
     res.json({ message: "Error creating job" });

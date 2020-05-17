@@ -188,4 +188,11 @@ select {
 .tag {
   color: $primary-color;
 }
+
+.card-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  align-content: center;
+}
 //CARD STYLES END
