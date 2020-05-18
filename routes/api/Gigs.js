@@ -4,7 +4,7 @@ const Gig = require("../../models/Job");
 
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
-  const limit = 30;
+  const limit = 10;
   let searchOptions = {
     typeOfWork: "Gig",
   };

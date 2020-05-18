@@ -32,8 +32,6 @@ export const GlobalProvider = ({ children }) => {
         type: "GET_JOBS",
         payload: res.data,
       });
-      console.log("Get all Jobs Ran");
-      console.log(`the search value is: ${state.searchValue}`);
     } catch (err) {
       dispatch({
         type: "JOBS_ERROR",

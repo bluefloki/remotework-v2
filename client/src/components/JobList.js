@@ -16,12 +16,13 @@ export const JobList = ({ work, defLogo }) => {
   } = useContext(GlobalContext);
 
   const [search, setSearch] = useState("");
+  const [triggerSearch, setTriggerSearch] = useState("");
 
   useEffect(() => {
     getJobs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => resetJobs();
-  }, [searchValue]);
+  }, [triggerSearch]);
 
   return (
     <div className="job-list">
@@ -40,7 +41,7 @@ export const JobList = ({ work, defLogo }) => {
           style={styles.button}
           onClick={() => {
             setSearchValue(search);
-            console.log(searchValue);
+            setTriggerSearch("Triggered");
           }}
         >
           Go
