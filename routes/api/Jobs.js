@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Job = require("../../models/Job");
+const Job = require("../../models").Job;
 const fileUpload = require("express-fileupload");
 router.use(fileUpload());
 const { v4: uuidv4 } = require("uuid");
@@ -8,16 +8,16 @@ const path = require("path");
 
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
-  console.log(req.query);
   const limit = 10;
-  let searchOptions = {
-    typeOfWork: "Job",
-  };
-  const allJobs = await Job.find(searchOptions)
-    .skip((page - 1) * limit)
-    .limit(limit)
-    .sort({ datePosted: -1 });
+  console.log(req.query);
   try {
+    const allJobs = await Job.findAll({
+      where: {
+        typeOfWork: "Job",
+      },
+      offset: (page - 1) * limit,
+      limit,
+    });
     res.status(200).json(allJobs);
   } catch (error) {
     console.log(error);
@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    let newJob = new Job(JSON.parse(req.body.data));
+    let newJob = Job.build(JSON.parse(req.body.data));
     if (req.files != null) {
       let logo = req.files.logo;
       if (
@@ -60,6 +60,7 @@ router.post("/", async (req, res) => {
       }
     }
     await newJob.save();
+    console.log("The job has been saved");
     res.status(201).json(newJob);
   } catch (error) {
     res.json({ message: "Error creating job" });

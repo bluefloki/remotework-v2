@@ -13,11 +13,12 @@
   "license": "ISC",
   "dependencies": {
     "concurrently": "^5.2.0",
-    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.3",
-    "mongoose": "^5.9.12",
     "sanitize-html": "^1.23.0",
+    "sequelize": "^5.21.9",
+    "sequelize-cli": "^5.5.1",
+    "sqlite3": "^4.2.0",
     "uuid": "^8.0.0"
   },
   "devDependencies": {

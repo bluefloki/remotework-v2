@@ -52,15 +52,15 @@ export const PostJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Submitted");
-    let { tags } = userInput;
-    tags = tags.split(",", 4);
-    tags = tags.map((tag) => {
-      tag = tag.trim();
-      return { title: tag };
-    });
+    // let { tags } = userInput;
+    // tags = tags.split(",", 4);
+    // tags = tags.map((tag) => {
+    //   tag = tag.trim();
+    //   return { title: tag };
+    // });
     const newJob = {
       ...userInput,
-      tags,
+      // tags,
       description,
     };
     let formData = new FormData();

@@ -11,7 +11,6 @@ export const JobList = ({ work, defLogo }) => {
     resetJobs,
     incrementPage,
     hasMore,
-    searchValue,
     setSearchValue,
   } = useContext(GlobalContext);
 

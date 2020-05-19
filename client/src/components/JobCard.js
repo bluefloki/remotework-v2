@@ -3,7 +3,6 @@ import Moment from "react-moment";
 
 export const JobCard = ({
   job: {
-    _id,
     employerName,
     title,
     category,
@@ -92,13 +91,7 @@ export const JobCard = ({
           <p style={{ fontWeight: "550" }}>{title}</p>
           <p>{location}</p>
         </div>
-        <div>
-          {tags.map((tag) => (
-            <p key={tag._id} className="tag">
-              {tag.title}
-            </p>
-          ))}
-        </div>
+        <div>{tags}</div>
       </div>
       {showDetails()}
     </div>

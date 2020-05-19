@@ -10,6 +10,7 @@ export default (state, action) => {
 
     case "RESET_JOBS":
       state.page = 1;
+      console.log("component unmounted");
       return {
         ...state,
         jobs: [],
