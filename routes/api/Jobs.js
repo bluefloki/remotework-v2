@@ -32,6 +32,7 @@ router.get("/", async (req, res) => {
       where: getSearchOptions(),
       offset: (page - 1) * limit,
       limit,
+      order: [["createdAt", "DESC"]],
     });
     res.status(200).json(allJobs);
   } catch (error) {
@@ -52,6 +53,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     let newJob = Job.build(JSON.parse(req.body.data));
+    console.log(req.body);
     if (req.files != null) {
       let logo = req.files.logo;
       if (
@@ -68,10 +70,12 @@ router.post("/", async (req, res) => {
         );
         logo.mv(logoPathName, (err) => {
           if (err) {
+            console.log(err);
             res.status(500).json({ message: "Cannot upload image" });
           }
         });
-        newJob.logoPath = logoPathName;
+        console.log("Image uploaded");
+        newJob.logoPath = logo.name;
       }
     }
     await newJob.save();

@@ -1,5 +1,4 @@
 -- Animations
--- Show images in the job card
--- Searchbar
+-- Compress the images
 
 https://www.npmjs.com/package/mongoose-fuzzy-searching

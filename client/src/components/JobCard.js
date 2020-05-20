@@ -8,7 +8,7 @@ export const JobCard = ({
     category,
     location,
     applyAt,
-    datePosted,
+    createdAt,
     tags,
     description,
     logoPath,
@@ -55,9 +55,15 @@ export const JobCard = ({
 
   //Function to show logo
   const showLogo = () => {
-    // if (logoPath != null) {
-    //   return <img src={require(`${logoPath}`)} alt="" className="card-img" />;
-    // }
+    if (logoPath != null) {
+      return (
+        <img
+          src={require(`../assets/uploads/${logoPath}`)}
+          alt=""
+          className="card-img"
+        />
+      );
+    }
     return (
       <p className="defLogo" style={{ fontSize: 30, margin: 0 }}>
         {defLogo}
@@ -83,7 +89,7 @@ export const JobCard = ({
         <div style={{ textAlign: "center" }}>
           {showLogo()}
           <p>
-            <Moment format="DD MMM YYYY">{datePosted}</Moment>
+            <Moment format="DD MMM YYYY">{createdAt}</Moment>
           </p>
         </div>
         <div style={{ fontSize: "1.1em" }}>

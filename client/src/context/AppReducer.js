@@ -10,10 +10,10 @@ export default (state, action) => {
 
     case "RESET_JOBS":
       state.page = 1;
-      console.log("component unmounted");
       return {
         ...state,
         jobs: [],
+        searchValue: "",
       };
 
     case "INCREMENT_PAGE": {
@@ -25,10 +25,11 @@ export default (state, action) => {
       };
     }
 
-    case "ADD_JOB":
-      return {
-        ...state,
-      };
+    // case "ADD_JOB":
+    //   return {
+    //     ...state,
+    //     Jobs: state.jobs,
+    //   };
 
     default:
       return state;

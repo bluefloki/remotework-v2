@@ -1,13 +1,22 @@
-import React, { useState, useReducer, useContext } from "react";
+import React, { useState, useReducer, useEffect, useContext } from "react";
 import { Navbar } from "./Navbar";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { GlobalContext } from "../context/GlobalState";
 import sanitizeHtml from "sanitize-html";
+import { Redirect } from "react-router-dom";
 
 export const PostJob = () => {
   //Use context to send the data
-  const { addJob } = useContext(GlobalContext);
+  const { addJob, resetJobs } = useContext(GlobalContext);
+
+  //set Redirect State
+  const [redirect, setRedirect] = useState(false);
+  const renderRedirect = () => {
+    if (redirect)
+      return <Redirect to={`/${userInput.typeOfWork.toLowerCase()}s`} />;
+  };
+
   //Set editor HTML
   const [editorHtml, setEditorHtml] = useState("");
   function handleHtml(html) {
@@ -51,7 +60,6 @@ export const PostJob = () => {
   //Create the object for POST
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Submitted");
     // let { tags } = userInput;
     // tags = tags.split(",", 4);
     // tags = tags.map((tag) => {
@@ -67,7 +75,8 @@ export const PostJob = () => {
     formData.append("data", JSON.stringify(newJob));
     formData.append("logo", logo);
     addJob(formData);
-    console.log(newJob);
+    alert(`${userInput.typeOfWork} Posted`);
+    setRedirect(true);
   };
 
   return (
@@ -91,10 +100,8 @@ export const PostJob = () => {
               />
             </div>
             <div className="field" style={{ paddingBottom: 20 }}>
-              <label htmlFor="logo" hidden>
-                Logo(Max 1 MB)
-              </label>
-              <input type="file" name="logo" onChange={handleFile} hidden />
+              <label htmlFor="logo">Logo(Max 1 MB)</label>
+              <input type="file" name="logo" onChange={handleFile} />
             </div>
           </div>
           <hr />
@@ -181,6 +188,7 @@ export const PostJob = () => {
           </div>
         </form>
       </div>
+      {renderRedirect()}
     </div>
   );
 };

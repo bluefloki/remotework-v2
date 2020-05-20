@@ -1,17 +1,33 @@
 const express = require("express");
 const router = express.Router();
 const Gig = require("../../models").Job;
+const Op = require("sequelize").Op;
 
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
   const limit = 10;
+  const getSearchOptions = () => {
+    let options = {
+      typeOfWork: "Gig",
+    };
+    if (search != "")
+      options = {
+        typeOfWork: "Gig",
+        [Op.or]: [
+          { title: { [Op.like]: [`%${search}%`] } },
+          { employerName: { [Op.like]: [`%${search}%`] } },
+          { tags: { [Op.like]: [`%${search}%`] } },
+          { location: { [Op.like]: [`%${search}%`] } },
+        ],
+      };
+    return options;
+  };
   try {
     const allGigs = await Gig.findAll({
-      where: {
-        typeOfWork: "Gig",
-      },
+      where: getSearchOptions(),
       offset: (page - 1) * limit,
       limit,
+      order: [["createdAt", "DESC"]],
     });
     res.status(200).json(allGigs);
   } catch (error) {
