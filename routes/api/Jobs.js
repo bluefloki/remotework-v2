@@ -5,16 +5,31 @@ const fileUpload = require("express-fileupload");
 router.use(fileUpload());
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
+const Op = require("sequelize").Op;
 
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
   const limit = 10;
   console.log(req.query);
+  const getSearchOptions = () => {
+    let options = {
+      typeOfWork: "Job",
+    };
+    if (search != "")
+      options = {
+        typeOfWork: "Job",
+        [Op.or]: [
+          { title: { [Op.like]: [`%${search}%`] } },
+          { employerName: { [Op.like]: [`%${search}%`] } },
+          { tags: { [Op.like]: [`%${search}%`] } },
+          { location: { [Op.like]: [`%${search}%`] } },
+        ],
+      };
+    return options;
+  };
   try {
     const allJobs = await Job.findAll({
-      where: {
-        typeOfWork: "Job",
-      },
+      where: getSearchOptions(),
       offset: (page - 1) * limit,
       limit,
     });

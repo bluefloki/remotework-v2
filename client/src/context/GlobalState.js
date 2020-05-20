@@ -32,7 +32,6 @@ export const GlobalProvider = ({ children }) => {
         type: "GET_JOBS",
         payload: res.data,
       });
-      console.log(res.data);
     } catch (err) {
       dispatch({
         type: "JOBS_ERROR",

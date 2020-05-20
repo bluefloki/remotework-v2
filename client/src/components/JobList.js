@@ -39,8 +39,8 @@ export const JobList = ({ work, defLogo }) => {
           className="btn btn-primary"
           style={styles.button}
           onClick={() => {
-            setSearchValue(search);
-            setTriggerSearch("Triggered");
+            setSearchValue(search.trim());
+            setTriggerSearch(search);
           }}
         >
           Go
