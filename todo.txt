@@ -1,4 +1,2 @@
--- Animations
--- Compress the images
-
-https://www.npmjs.com/package/mongoose-fuzzy-searching
+-- Add analytics
+-- Add Payment

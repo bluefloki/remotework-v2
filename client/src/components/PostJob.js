@@ -76,6 +76,7 @@ export const PostJob = () => {
     formData.append("logo", logo);
     addJob(formData);
     alert(`${userInput.typeOfWork} Posted`);
+    setTimeout(3);
     setRedirect(true);
   };
 

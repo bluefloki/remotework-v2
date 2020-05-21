@@ -195,8 +195,8 @@ select {
   background-color: #fff;
   padding: 30px 20px;
   border-radius: 0 0 5px 5px;
-  -webkit-transition: all 0.7s ease;
-  transition: all 0.7s ease;
+  -webkit-transition: all 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
 }
 
 .card-grid {

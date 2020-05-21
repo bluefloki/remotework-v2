@@ -7,6 +7,7 @@ const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const Op = require("sequelize").Op;
 
+//GET ALL THE JOBS
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
   const limit = 10;
@@ -41,15 +42,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// router.get("/:id", async (req, res) => {
-//   const job = await Job.findById(req.params.id);
-//   try {
-//     res.status(200).json(job);
-//   } catch (error) {
-//     res.status(404).json({ message: "Job not found" });
-//   }
-// });
-
+//SAVE JOB/GIG
 router.post("/", async (req, res) => {
   try {
     let newJob = Job.build(JSON.parse(req.body.data));
