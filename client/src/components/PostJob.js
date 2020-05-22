@@ -76,7 +76,7 @@ export const PostJob = () => {
     formData.append("logo", logo);
     addJob(formData);
     alert(`${userInput.typeOfWork} Posted`);
-    setTimeout(3);
+    setTimeout(4);
     setRedirect(true);
   };
 
@@ -101,7 +101,7 @@ export const PostJob = () => {
               />
             </div>
             <div className="field" style={{ paddingBottom: 20 }}>
-              <label htmlFor="logo">Logo(Max 1 MB)</label>
+              <label htmlFor="logo">Logo</label>
               <input type="file" name="logo" onChange={handleFile} />
             </div>
           </div>

@@ -3,6 +3,7 @@ import "./App.css";
 import { MainPage } from "./components/MainPage";
 import { JobList } from "./components/JobList";
 import { PostJob } from "./components/PostJob";
+import { ContactPage } from "./components/ContactPage";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import { GlobalProvider } from "./context/GlobalState";
 
@@ -22,6 +23,7 @@ function App() {
           render={(props) => <JobList work="Gigs" defLogo="🤵" {...props} />}
         />
         <Route exact path="/postjob" component={PostJob} />
+        <Route exact path="/contact" component={ContactPage} />
       </Router>
     </GlobalProvider>
   );

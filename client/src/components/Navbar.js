@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 export const Navbar = () => {
   return (
     <nav className="navbar">
-      <div className="navbar-brand">RemoteWork</div>
+      <div className="navbar-brand">WorkRemote</div>
       <div className="navbar-menu">
         <Link to="/" className="navbar-link navbar-item">
           Home
+        </Link>
+        <Link to="/contact" className="navbar-link navbar-item">
+          Contact
         </Link>
         <Link to="/jobs" className="navbar-link navbar-item">
           Jobs

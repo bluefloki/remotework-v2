@@ -6,6 +6,8 @@ router.use(fileUpload());
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const Op = require("sequelize").Op;
+const Jimp = require("jimp");
+const fs = require("fs");
 
 //GET ALL THE JOBS
 router.get("/", async (req, res) => {
@@ -46,28 +48,38 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     let newJob = Job.build(JSON.parse(req.body.data));
-    console.log(req.body);
+    //Logo Upload
     if (req.files != null) {
       let logo = req.files.logo;
-      if (
-        logo.size < 1000000 &&
-        (logo.mimetype == "image/jpeg" || logo.mimetype == "image/png")
-      ) {
-        logo.mimetype == "image/png" ? (logo.name = `${uuidv4()}.png`) : ``;
-        logo.mimetype == "image/jpeg" ? (logo.name = `${uuidv4()}.jpg`) : ``;
-        const logoPathName = path.resolve(
-          __dirname,
-          "../../",
-          "client/src/assets/uploads",
-          logo.name
-        );
-        logo.mv(logoPathName, (err) => {
-          if (err) {
-            console.log(err);
-            res.status(500).json({ message: "Cannot upload image" });
-          }
+      if (logo.size < 10000000 && logo.mimetype.startsWith("image")) {
+        if (logo.mimetype.includes("jpeg")) {
+          logo.name = `${uuidv4()}.jpg`;
+        } else if (logo.mimetype.includes("png")) {
+          logo.name = `${uuidv4()}.png`;
+        }
+        const tempPath = path.resolve(__dirname, "temp", logo.name);
+        logo.mv(tempPath, (err) => {
+          if (err) console.log(err);
+          console.log("temp file uploaded");
         });
-        console.log("Image uploaded");
+        //Compress the image and store in the real path
+        Jimp.read(tempPath)
+          .then((img) => {
+            return img
+              .resize(150, Jimp.AUTO)
+              .quality(80)
+              .write(
+                path.resolve(
+                  __dirname,
+                  "../../",
+                  "client/src/assets/uploads",
+                  logo.name
+                )
+              );
+          })
+          .catch((err) => console.log(err));
+        console.log("image compressed");
+        fs.unlink(tempPath, (err) => console.log(err));
         newJob.logoPath = logo.name;
       }
     }
