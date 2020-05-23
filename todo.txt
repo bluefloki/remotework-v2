@@ -2,4 +2,4 @@
 -- Add Payment
 -- Make Admin Panel
 
---BLEH
+pwd = c2b8b26974fe037c7abbe7fb59f4468c18babdd1f7b07a858931efb2c8ee6289
