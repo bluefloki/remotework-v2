@@ -1,6 +1,0 @@
--- Add Analytics
--- Add Payment
-
-pwd = _Spaceisawesome123
-
-https://www.freecodecamp.org/forum/t/git-pull-how-to-override-local-files-with-git-pull/13216
