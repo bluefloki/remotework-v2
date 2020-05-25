@@ -6,7 +6,7 @@ export const AdminNavbar = () => {
   const { setAuthTokens } = useAuth();
 
   const logOut = () => {
-    setAuthTokens();
+    setAuthTokens("");
     localStorage.removeItem("tokens");
   };
   return (

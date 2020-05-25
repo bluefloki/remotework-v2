@@ -103,5 +103,3 @@ export const JobCard = ({
     </div>
   );
 };
-
-const styles = {};

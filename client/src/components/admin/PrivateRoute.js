@@ -9,7 +9,9 @@ function PrivateRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={(props) => (authTokens ? <Component {...props} /> : <Login />)}
+      render={(props) =>
+        authTokens ? <Component {...props} {...rest} /> : <Login />
+      }
     />
   );
 }

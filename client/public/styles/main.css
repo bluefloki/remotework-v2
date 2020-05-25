@@ -219,4 +219,17 @@ select {
   -ms-flex-line-pack: center;
       align-content: center;
 }
+
+table,
+th,
+td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  padding: 10px;
+  margin: auto;
+}
+
+table {
+  width: 80%;
+}
 /*# sourceMappingURL=main.css.map */

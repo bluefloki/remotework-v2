@@ -59,7 +59,7 @@ export const JobList = ({ work, defLogo }) => {
         endMessage={<p style={{ marginBottom: 50 }}></p>}
       >
         {jobs.map((job) => (
-          <JobCard key={job._id} job={job} defLogo={defLogo} />
+          <JobCard key={job.id} job={job} defLogo={defLogo} />
         ))}
       </InfiniteScroll>
     </div>

@@ -5,7 +5,7 @@ const Op = require("sequelize").Op;
 
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
-  const limit = 10;
+  const limit = 30;
   const getSearchOptions = () => {
     let options = {
       typeOfWork: "Gig",

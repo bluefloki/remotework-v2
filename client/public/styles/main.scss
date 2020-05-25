@@ -196,3 +196,15 @@ select {
   align-content: center;
 }
 //CARD STYLES END
+table,
+th,
+td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  padding: 10px;
+  margin: auto;
+}
+
+table {
+  width: 80%;
+}

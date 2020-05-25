@@ -9,6 +9,7 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import { GlobalProvider } from "./context/GlobalState";
 import { AuthProvider } from "./context/Auth";
 import PrivateRoute from "./components/admin/PrivateRoute";
+import { AdminJobs } from "./components/admin/AdminJobs.js";
 
 function App() {
   return (
@@ -28,7 +29,19 @@ function App() {
           />
           <Route exact path="/postjob" component={PostJob} />
           <Route exact path="/contact" component={ContactPage} />
-          <PrivateRoute path="/admin" component={Admin} />
+          <PrivateRoute exact path="/admin" component={Admin} />
+          <PrivateRoute
+            exact
+            path="/admin/jobs"
+            component={AdminJobs}
+            work="Jobs"
+          />
+          <PrivateRoute
+            exact
+            path="/admin/gigs"
+            component={AdminJobs}
+            work="Gigs"
+          />
         </Router>
       </AuthProvider>
     </GlobalProvider>

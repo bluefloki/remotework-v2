@@ -22,6 +22,10 @@ router.post("/login", (req, res) => {
   }
 });
 
-//Route to delete a Gig or Job
+router.delete("/jobs/:id", async (req, res) => {
+  const id = req.params;
+});
+
+//CHECK AUTHENTICATED
 
 module.exports = router;

@@ -12,7 +12,7 @@ const fs = require("fs");
 //GET ALL THE JOBS
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
-  const limit = 10;
+  const limit = 30;
   console.log(req.query);
   const getSearchOptions = () => {
     let options = {
