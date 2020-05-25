@@ -2,15 +2,12 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { JSON_SECRET_KEY } = require("./middleware/config");
+const Job = require("../../models").Job;
 
 let admin = {
   username: "_eflatminor",
-  password: "c2b8b26974fe037c7abbe7fb59f4468c18babdd1f7b07a858931efb2c8ee6289",
+  password: "Meeran12",
 };
-
-router.get("/", (req, res) => {
-  res.send("admin");
-});
 
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
@@ -22,10 +19,27 @@ router.post("/login", (req, res) => {
   }
 });
 
-router.delete("/jobs/:id", async (req, res) => {
-  const id = req.params;
+//DELETE JOBS/GIGS
+router.delete("/jobs/:id", authenticateToken, async (req, res) => {
+  try {
+    await Job.destroy({ where: { id: req.params.id } });
+    console.log("Job/Gig deleted");
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 //CHECK AUTHENTICATED
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1]; // The code before && means if it exists
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, JSON_SECRET_KEY, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+}
 
 module.exports = router;

@@ -13,7 +13,6 @@ const fs = require("fs");
 router.get("/", async (req, res) => {
   const { search, page } = req.query;
   const limit = 30;
-  console.log(req.query);
   const getSearchOptions = () => {
     let options = {
       typeOfWork: "Job",

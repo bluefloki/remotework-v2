@@ -25,11 +25,12 @@ export default (state, action) => {
       };
     }
 
-    // case "ADD_JOB":
-    //   return {
-    //     ...state,
-    //     Jobs: state.jobs,
-    //   };
+    case "DELETE_JOB": {
+      return {
+        ...state,
+        jobs: state.jobs.filter((job) => job.id !== action.payload),
+      };
+    }
 
     default:
       return state;

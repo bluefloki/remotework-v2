@@ -84,6 +84,29 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  //DELETE JOB
+  async function deleteJob(id) {
+    try {
+      await axios.delete(`/api/v1/admin/jobs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.tokens).accessToken
+          }`,
+        },
+      });
+
+      dispatch({
+        type: "DELETE_JOB",
+        payload: id,
+      });
+    } catch (err) {
+      dispatch({
+        type: "JOB_ERROR",
+        payload: err.response.data.error,
+      });
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -98,6 +121,7 @@ export const GlobalProvider = ({ children }) => {
         resetJobs,
         incrementPage,
         setSearchValue,
+        deleteJob,
       }}
     >
       {children}

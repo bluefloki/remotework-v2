@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Moment from "react-moment";
+import { GlobalContext } from "../../context/GlobalState";
 
 export const JobTable = ({ job: { id, employerName, title, createdAt } }) => {
+  const { deleteJob } = useContext(GlobalContext);
   return (
     <tr>
       <td>{id}</td>
@@ -13,7 +15,9 @@ export const JobTable = ({ job: { id, employerName, title, createdAt } }) => {
         </p>
       </td>
       <td>
-        <button className="btn btn-danger">X</button>
+        <button className="btn btn-danger" onClick={() => deleteJob(id)}>
+          X
+        </button>
       </td>
     </tr>
   );
