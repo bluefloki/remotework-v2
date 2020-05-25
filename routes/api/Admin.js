@@ -3,11 +3,15 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { JSON_SECRET_KEY } = require("./middleware/config");
 const Job = require("../../models").Job;
+const path = require("path");
+const fs = require("fs");
 
 let admin = {
   username: "_eflatminor",
-  password: "Meeran12",
+  password: "_Spaceisawesome123",
 };
+
+console.log(admin);
 
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
@@ -22,6 +26,14 @@ router.post("/login", (req, res) => {
 //DELETE JOBS/GIGS
 router.delete("/jobs/:id", authenticateToken, async (req, res) => {
   try {
+    const job = await Job.findOne({ where: { id: req.params.id } });
+    const delPath = path.resolve(
+      __dirname,
+      "../../",
+      "client/src/assets/uploads",
+      job.logoPath
+    );
+    fs.unlink(delPath, (err) => console.log(err));
     await Job.destroy({ where: { id: req.params.id } });
     console.log("Job/Gig deleted");
   } catch (error) {

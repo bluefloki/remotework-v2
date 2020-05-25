@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
     //Logo Upload
     if (req.files != null) {
       let logo = req.files.logo;
-      if (logo.size < 10000000 && logo.mimetype.startsWith("image")) {
+      if (logo.size < 5000000 && logo.mimetype.startsWith("image")) {
         if (logo.mimetype.includes("jpeg")) {
           logo.name = `${uuidv4()}.jpg`;
         } else if (logo.mimetype.includes("png")) {
@@ -82,7 +82,7 @@ router.post("/", async (req, res) => {
         newJob.logoPath = logo.name;
       }
     }
-    await newJob.save();
+    // await newJob.save();
     console.log("The job has been saved");
     res.status(201).json(newJob);
   } catch (error) {

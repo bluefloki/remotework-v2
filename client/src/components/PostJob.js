@@ -68,7 +68,6 @@ export const PostJob = () => {
     // });
     const newJob = {
       ...userInput,
-      // tags,
       description,
     };
     let formData = new FormData();
