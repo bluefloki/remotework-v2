@@ -11,8 +11,6 @@ let admin = {
   password: "_Spaceisawesome123",
 };
 
-console.log(admin);
-
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
   if (username == admin.username && password == admin.password) {
