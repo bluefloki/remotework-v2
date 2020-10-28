@@ -9,7 +9,7 @@ export const MainPage = () => {
       <Navbar />
       <div style={styles.headings}>
         <h1 style={{ fontSize: "2.2em" }}>
-          Welcome to Pakistan's only site for Remote Jobs 🔥
+          Welcome to an unpublished site for Remote Jobs 🔥
         </h1>
         <div>
           <Link to="/jobs" className="btn btn-primary" style={styles.button}>

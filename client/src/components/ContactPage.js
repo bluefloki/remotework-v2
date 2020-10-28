@@ -10,10 +10,10 @@ export const ContactPage = () => {
         <h3>
           For complaints, queries, and suggestions, contact us at{" "}
           <a
-            href="mailto: remotework.pk@gmail.com"
+            href="mailto: contact@workremote.com"
             style={{ textDecoration: "none" }}
           >
-            <span className="color-primary">remotework.pk@gmail.com</span>
+            <span className="color-primary">contact@workremote.com</span>
           </a>
         </h3>
       </div>
