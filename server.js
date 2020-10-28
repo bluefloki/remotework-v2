@@ -4,6 +4,11 @@ app.use(express.json());
 
 const path = require("path");
 
+// dotenv
+if(process.env.NODE_ENV !== "production"){
+  require('dotenv').config();
+}
+
 //Routes
 app.use("/api/v1/jobs", require("./routes/api/Jobs"));
 app.use("/api/v1/gigs", require("./routes/api/Gigs"));
@@ -18,5 +23,5 @@ if (process.env.NODE_ENV == "production") {
   });
 }
 
-const port = 5050 || process.env.PORT;
-app.listen(port, () => console.log("App is running on port 5050"));
+const port = 5000 || process.env.PORT;
+app.listen(port, () => console.log("App is running on port 5000"));
